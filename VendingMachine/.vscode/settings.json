@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": ["VendingMachine/src"],
+    "java.project.outputPath": "VendingMachine/bin",
+    "java.project.referencedLibraries": [
+        "VendingMachine/lib/**/*.jar"
+    ]
+}
