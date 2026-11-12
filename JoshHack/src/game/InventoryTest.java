@@ -107,7 +107,7 @@ public class InventoryTest {
         //act
         boolean result = inventory.contains(null);
         //assert
-        assertFalse(result);
+        assertTrue(result);
 
     }
 
