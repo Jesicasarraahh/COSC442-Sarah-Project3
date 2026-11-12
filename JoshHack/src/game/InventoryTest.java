@@ -89,7 +89,36 @@ public class InventoryTest {
 
     @Test
     void testContains() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act
+        boolean result = inventory.contains(knife);
+        //assert
+        assertTrue(result);
 
+    }
+
+    @Test 
+    void testContainsNull() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act
+        boolean result = inventory.contains(null);
+        //assert
+        assertFalse(result);
+
+    }
+
+    @Test 
+    void testContainsMissingItem() {
+        //arrange
+        inventory.add(apple);
+       //act
+        boolean result = inventory.contains(knife);
+        //assert
+        assertFalse(result);
     }
 
     @Test
