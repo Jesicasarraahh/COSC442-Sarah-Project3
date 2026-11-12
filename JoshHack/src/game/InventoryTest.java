@@ -46,7 +46,7 @@ public class InventoryTest {
     @Test 
     void testAddNullItem() {
         //act
-        inventory.add(null);
+        inventory.add(apple);
         //assert
         inventory.add(null);
         //assert
@@ -123,21 +123,90 @@ public class InventoryTest {
 
     @Test
     void testGet() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act
+        Item result = inventory.get(1);
+        //assert
+        assertSame(knife, result);
+        assertNull(inventory.get(4));
 
     }
+
+    @Test 
+    void testGetOutOfBounds() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act and assert
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> 
+            inventory.get(5));
+        
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> 
+            inventory.get(-1));
+        };
+    
 
     @Test
     void testGetItems() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act
+        Item[] result = inventory.getItems();
+        //assert
+        assertArrayEquals(new Item[]{apple, knife, null, null, null}, result);
 
     }
 
+    @Test 
+    void testGetItemsEmptyInventory() {
+        //act
+        Item[] result = inventory.getItems();
+        //assert
+        assertArrayEquals(new Item[]{null, null, null, null, null}, result);
+
+    }
+
+   
+
     @Test
     void testIsFull() {
+        //arrange
+        for(int i = 0; i<5; i++) {
+            inventory.add(apple);
+        }
+        //act
+        boolean result = inventory.isFull();
+        //assert
+        assertTrue(result);
 
     }
 
     @Test
     void testRemove() {
+        //arrange
+        inventory.add(apple);
+        inventory.add(knife);
+        //act
+        inventory.remove(knife);
+        //assert
+        assertSame(apple, inventory.get(0));
+        assertNull(inventory.get(1));
+        assertFalse(inventory.contains(knife));
+        assertFalse(inventory.isFull());
 
+    }
+
+    @Test 
+    void testRemoveMissingItem() {
+        //arrange
+        inventory.add(apple);
+        Item[] itemsBefore = inventory.getItems().clone();
+        //act
+        inventory.remove(knife);
+        //assert
+        assertArrayEquals(itemsBefore, inventory.getItems());
     }
 }
